@@ -1,7 +1,7 @@
 streamlit
 pillow
 exif
-collections
+collection
 pandas
 folium
 streamlit-folium
