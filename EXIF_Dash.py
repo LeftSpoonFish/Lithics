@@ -1,10 +1,19 @@
+#Import Modules
+import pandas as pd
+import numpy as np
+import geopandas
+import geopy
+import io
+import os
+import folium
+import folium.plugins as plugins
+import xlrd
 import streamlit as st
 import PIL
 from exif import Image
 from collections import defaultdict
-import pandas as pd
-import folium
-#import streamlit_folium as st_folium
+
+import streamlit_folium as st_folium
 import os.path
 
 st.set_page_config(page_title="Geolocating Photos Application",
@@ -14,14 +23,21 @@ st.set_page_config(page_title="Geolocating Photos Application",
 
 left, right = st.columns([5, 3])
 
-#Files upload/copy
-files = st.sidebar.file_uploader(label="Choose a file", accept_multiple_files=True)
-save_path = '/images'
-
-
-
 st.sidebar.title("Geolocating Photos Application")
 st.sidebar.markdown("Upload an Image and Get Its location on a Map")
+
+
+#Files upload/copy
+uploaded = st.sidebar.file_uploader(label="Choose a file", accept_multiple_files=True)
+save_path = '/images'
+
+#EXCEL FILES
+#Files upload/copy
+#uploaded = st.sidebar.file_uploader(label="Choose a XLSX file:", type="xlsx", #accept_multiple_files=False)
+#if uploaded is not None:
+#    df = pd.read_excel(uploaded)
+#    st.dataframe(df)
+
 
 
 def decimal_coords(coords, ref):
@@ -32,7 +48,6 @@ def decimal_coords(coords, ref):
 
 
 info_dict = defaultdict(list)
-
 
 def collect_info_dict(file, image):
     info_dict["name"].append(file.name)
@@ -64,8 +79,8 @@ df = pd.DataFrame()
 
 
 
-if files is not None:
-    for file in files:
+if uploaded is not None:
+    for file in uploaded:
         img = Image(file)
         left.image(PIL.Image.open(file))
         if img.has_exif:
@@ -96,16 +111,38 @@ st.dataframe(data=df)
 #renders single map bc outside loop
 st.map(df)
 
+#
+cwd = os.getcwd()
+imgdir = '/images'
+
+save_path = os.path.join(cwd+imgdir)
 
 #Saves copy of files
-save_path = '/images'
-for file in files:
-    with open(file.name, "wb") as f:
-        f.write(file.getbuffer())
+#for file in uploaded:
+#    with open(file.name, "wb") as f:
+#        try:
+#            os.makedirs('images', exist_ok=True)
+#            f.write(file.getbuffer())
+#            f.close()
+#        except: 
+#            pass
 
+#__new
 
+#function to save files and create 'images' dir to save them into
+def save_uploadedfile(uploaded):
+    with open(os.path.join('images',uploaded.name), "wb") as f:
+        f.write(uploaded.getbuffer())
+        #return st.success("Saved:{} to Data".format(uploaded.name))
 
-
+for file in uploaded:
+    try:
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+        if uploaded is not None:
+           save_uploadedfile(file)
+    except:
+        pass
 
 
 
