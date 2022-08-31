@@ -5,4 +5,11 @@ collection
 pandas
 folium
 streamlit-folium
-#os
+os
+numpy
+geopandas
+geopy
+io
+xlrd
+exif
+collections
