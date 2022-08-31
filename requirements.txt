@@ -8,4 +8,3 @@ pillow
 streamlit
 streamlit-folium
 xlrd
-collections
