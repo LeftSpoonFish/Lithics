@@ -2,7 +2,6 @@ exif
 folium
 geopandas
 geopy
-io
 numpy
 os
 pandas
