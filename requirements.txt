@@ -3,7 +3,6 @@ folium
 geopandas
 geopy
 numpy
-os
 pandas
 pillow
 streamlit
