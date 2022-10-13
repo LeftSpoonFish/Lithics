@@ -12,6 +12,7 @@ import streamlit as st
 import PIL
 from exif import Image
 from collections import defaultdict
+from PIL import Image
 
 import streamlit_folium as st_folium
 import os.path
