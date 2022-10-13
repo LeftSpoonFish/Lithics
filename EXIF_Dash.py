@@ -17,7 +17,7 @@ import streamlit_folium as st_folium
 import os.path
 
 st.set_page_config(page_title="Geolocating Photos Application",
-                   page_icon=image.open(r"./ArrowheadFavicon.png"),
+                   page_icon=Image.open(r"./ArrowheadFavicon.png"),
                    layout="wide",
                    initial_sidebar_state="expanded")
 
