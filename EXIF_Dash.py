@@ -12,13 +12,13 @@ import streamlit as st
 import PIL
 from exif import Image
 from collections import defaultdict
-from PIL import Image
+#from PIL import Image
 
 import streamlit_folium as st_folium
 import os.path
 
 st.set_page_config(page_title="Geolocating Photos Application",
-                   page_icon=Image.open(r"ArrowheadFavicon.png"),
+                   page_icon=("ArrowheadFavicon.png"),
                    layout="wide",
                    initial_sidebar_state="expanded")
 
